@@ -1,6 +1,6 @@
 {
   "name": "hookman",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "react hooks状态管理工具, 高效、简洁、小巧（体积不到1kb）, 不再需要redux繁琐的connect嵌套, 就能拥有全局状态管理的便利性！",
   "main": "index.js",
   "scripts": {
