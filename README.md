@@ -15,7 +15,7 @@ npm install git+https://github.com/xiaomocqk/hookman.git
 import React from 'react';
 import hookman from 'hookman';
 
-const store = { count: 1 };
+const store = { counter: 1 };
 const useGlobal = hookman(React, store);
 
 export default useGlobal;

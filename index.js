@@ -6,13 +6,19 @@ export default function(React, store) {
   function useGlobal(){
     let [store$, setStore] = React.useState(store);
 
-    React.useEffect(() => listeners.push(setStore), []);
+    React.useEffect(() => {
+      let length = listeners.push(setStore);
+
+      // Remove
+      return () => listeners.splice(length - 1, 1);
+    }, []);
 
     return [store$, setState];
   }
 
   function setState(newState) {
-    let store$ = { ...store, ...newState };
-    listeners.forEach(listener => listener(store$));
+    // Recode
+    store = { ...store, ...newState };
+    listeners.forEach(listener => listener(store));
   }
 }
