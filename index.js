@@ -1,23 +1,25 @@
 const listeners = [];
 
-export default function(React, store) {
+export default function (React, store) {
   return useGlobal;
-  
-  function useGlobal(){
-    let [store$, setStore] = React.useState(store);
+
+  function useGlobal() {
+    let [globalState, setGlobalState] = React.useState(store);
 
     React.useEffect(() => {
-      let length = listeners.push(setStore);
+      let idx = listeners.push(setGlobalState) - 1;
 
-      // Remove
-      return () => listeners.splice(length - 1, 1);
+      return () => listeners.splice(idx, 1);
     }, []);
 
-    return [store$, setState];
+    return [globalState, setState];
   }
 
   function setState(newState) {
-    // Recode
+    if (typeof newState === 'function') {
+      newState = newState(store) || {};
+    }
+
     store = { ...store, ...newState };
     listeners.forEach(listener => listener(store));
   }
