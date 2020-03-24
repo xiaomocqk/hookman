@@ -1,6 +1,6 @@
 const listeners = [];
 
-export default function (React, store) {
+export default function (React, store, actions) {
   return useGlobal;
 
   function useGlobal() {
@@ -12,7 +12,7 @@ export default function (React, store) {
       return () => listeners.splice(idx, 1);
     }, []);
 
-    return [globalState, setState];
+    return [globalState, setState, dispatch];
   }
 
   function setState(newState) {
@@ -22,5 +22,10 @@ export default function (React, store) {
 
     store = { ...store, ...newState };
     listeners.forEach(listener => listener(store));
+  }
+
+  function dispatch(type, payload) {
+    let newState = actions(store)[type]?.(payload);
+    newState && setState(newState);
   }
 }
