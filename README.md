@@ -42,7 +42,7 @@ function App() {
   retrun (
     <div>
       <Counter />
-      <button onClick={add}>+1</button>)}>Another +1</button>
+      <button onClick={add}>+1</button>
     </div>
   );
 
